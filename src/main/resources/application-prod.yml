@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: user-service
+
+  config:
+    import: configserver:http://config-server:9196
+server:
+  port: ${USER_SERVICE_PORT:9002}
