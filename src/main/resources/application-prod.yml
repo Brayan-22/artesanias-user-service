@@ -1,8 +1,29 @@
 spring:
   application:
     name: user-service
-
   config:
-    import: configserver:http://config-server:9196
+    import: optional:configserver:http://localhost:9196
+  jpa:
+    database: postgresql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/artesanias
+    username: artesanias
+    password: artesanias
 server:
-  port: ${USER_SERVICE_PORT:9002}
+  port: ${PORT:9002}
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
